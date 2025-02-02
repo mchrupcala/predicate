@@ -1,4 +1,5 @@
 export default async function handler(req, res) {
+  const { taskID } = req.query;
   const externalApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   if (req.method !== "GET") {
@@ -6,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(`${externalApiUrl}/tasks`, {
+    const response = await fetch(`${externalApiUrl}/task/${taskID}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -1,5 +1,5 @@
-import { TaskResponse } from "@/app/page";
-export const getTask = async (): Promise<TaskResponse | null> => {
+import { Task } from "@/app/components/TaskPage";
+export const getTask = async (taskID: string): Promise<Task | null> => {
   const url = process.env.NEXT_PUBLIC_API_URL;
   if (!url) {
     console.warn("API URL is undefined NEXT_PUBLIC_API_URL");
@@ -7,7 +7,7 @@ export const getTask = async (): Promise<TaskResponse | null> => {
   }
 
   try {
-    const res = await fetch("/api/proxy");
+    const res = await fetch(`/api/proxy?taskID=${taskID}`);
     if (!res.ok) throw new Error("Failed to fetch tasks");
 
     const data = await res.json();
