@@ -5,6 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-inter: "__Inter_e5ab12";
+  --font-jetbrains-mono: "__JetBrains_Mono_3c557b";
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,11 +19,19 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+p,
+span,
+h3 {
+  color: oklch(0.869 0.022 252.894);
+  font-size: var(--text-sm); /* 0.875rem (14px) */
+  line-height: var(--text-sm--line-height); /* calc(1.25 / 0.875) */
 }
