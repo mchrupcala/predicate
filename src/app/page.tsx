@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getTask } from "../api/tasks";
+import { getTask } from "../pages/api/tasks";
 
 interface OperatorResponse {
   task_id: string;
