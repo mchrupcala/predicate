@@ -1,16 +1,33 @@
-import { tasksResponse } from "../../sample-tasks-response";
+// import { tasksResponse } from "../../sample-tasks-response";
 import { TaskResponse } from "@/app/page";
-export const getTask = (): TaskResponse | null => {
-  //TODO: CORS is blocked locally -- will this work if deployed to Vercel? Do I want to or...nah? How do I present this?
-  // const url = process.env.NEXT_PUBLIC_API_URL || "";
-  // console.log(url);
+export const getTask = async (): Promise<TaskResponse | null> => {
+  const url = process.env.NEXT_PUBLIC_API_URL;
+  if (!url) {
+    console.warn("API URL is undefined NEXT_PUBLIC_API_URL");
+    return null;
+  }
+  console.log("url: ", url);
 
   try {
-    // const res = await fetch(url);
-    console.log(tasksResponse);
-    return tasksResponse;
+    const res = await fetch(`${url}/tasks`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      console.warn(
+        `API request failed with status ${res.status}: ${res.statusText}`
+      );
+      return null;
+    }
+
+    const data = await res.json();
+    console.log("API Response:", data);
+    return data as TaskResponse;
   } catch (error) {
-    console.warn("Something went wrong: ", error);
+    console.error("Something went wrong:", error);
     return null;
   }
 };

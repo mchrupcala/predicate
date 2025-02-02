@@ -25,9 +25,9 @@ interface Task {
   operator_responses: OperatorResponse[];
 }
 
-// interface TaskResponse {
-//   tasks: Task[];
-// }
+export interface TaskResponse {
+  tasks: Task[];
+}
 
 export default function Home() {
   const [task, setTask] = useState<Task | null>(null);
